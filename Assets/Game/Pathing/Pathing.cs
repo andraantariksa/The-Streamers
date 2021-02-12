@@ -2,33 +2,69 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pathing : MonoBehaviour
+public class Pathing
 {
-    ArrayList<Vector2> starting;
+    public ISet<Vector2> nodes = new HashSet<Vector2>();
+    // Path is bidirectional, check both key and value
+    public IDictionary<Vector2, Vector2> path = new Dictionary<Vector2, Vector2>();
 
-    void Start()
+    IList<Vector2> GetNeighbors(Vector2 node)
     {
-        
-    }
-
-    int EuclideanDistance(Vector2 a, Vector2 b)
-    {
-        return (int) Mathf.Sqrt(Mathf.Pow(node.x - goal.x, 2) +
-            Mathf.Pow(node.y - goal.y, 2) +
-            Mathf.Pow(node.z - goal.z, 2));
-    }
-
-    void GetShortestPathAStar(Node target)
-    { 
-        for (Node source: starting)
+        var neighbors = new List<Vector2>();
+        foreach (KeyValuePair<Vector2, Vector2> pair in path)
         {
-
+            if (pair.Key == node)
+            {
+                neighbors.Add(pair.Value);
+            }
+            else if (pair.Value == node)
+            {
+                neighbors.Add(pair.Key);
+            }
         }
+        return neighbors;
     }
 
-    bool IsRootConnectedTo(Node target)
+    bool IsConnected(Vector2 startPos, Vector2 targetPos)
     {
-        Priority
+        var queue = new Queue<Vector2>();
+        var exploredNodes = new HashSet<Vector2>();
+
+        queue.Enqueue(startPos);
+
+        while(queue.Count > 0)
+        {
+            var currentPos = queue.Dequeue();
+            if (currentPos == targetPos)
+            {
+                return true;
+            }
+
+            var neighbors = GetNeighbors(currentPos);
+            foreach(Vector2 neighbor in neighbors)
+            {
+                if (!exploredNodes.Contains(neighbor))
+                {
+                    exploredNodes.Add(neighbor);
+                    queue.Enqueue(neighbor);
+                }
+            }
+        }
+
+        return false;
+    }
+
+    bool IsStartingNodeConnectedTo(ISet<Vector2> starts, Vector2 target)
+    {
+        foreach (Vector2 start in starts)
+        {
+            var isConnected = IsConnected(start, target);
+            if (isConnected == true)
+            {
+                return true;
+            }
+        }
+
         return false;
     }
 }
