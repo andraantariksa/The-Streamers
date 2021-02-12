@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-    ArrayList<Node> parent;
-    ArrayList<Node> child;
-    Vector2 pos;
+    // ArrayList<Node> parent;
+    // ArrayList<Node> child;
+    // Vector2 pos;
 
-    void Start()
-    {
+    // void Start()
+    // {
         
-    }
+    // }
 }
