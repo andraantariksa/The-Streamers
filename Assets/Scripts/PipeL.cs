@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PipeStraight : MonoBehaviour
+public class PipeL : MonoBehaviour
 {
     Piping piping;
     Tilemap tilemap;
@@ -12,6 +12,8 @@ public class PipeStraight : MonoBehaviour
     Sprite[] sprites;
     [SerializeField]
     byte state = 0;
+
+    public bool isInteractable = false;
 
     void Start()
     {
@@ -34,12 +36,24 @@ public class PipeStraight : MonoBehaviour
         {
             case 0:
                 tilePos.y += 1;
-                tilePos2.y -= 1;
+                tilePos2.x += 1;
+                piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos));
+                piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos2));
+                break;
+            case 1:
+                tilePos.y -= 1;
+                tilePos2.x += 1;
+                piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos));
+                piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos2));
+                break;
+            case 2:
+                tilePos.y -= 1;
+                tilePos2.x -= 1;
                 piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos));
                 piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos2));
                 break;
             default:
-                tilePos.x += 1;
+                tilePos.y += 1;
                 tilePos2.x -= 1;
                 piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos));
                 piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos2));
@@ -50,10 +64,14 @@ public class PipeStraight : MonoBehaviour
 
     void OnMouseDown()
     {
-        ChangeState();
-        SetupPathingAndSprite();
-
-        piping.OnPipeChange();
+        if (isInteractable) 
+        {
+            ChangeState();
+            SetupPathingAndSprite();
+    
+            piping.OnPipeChange();
+        }
+        
     }
 
     void ChangeState()
