@@ -110,6 +110,11 @@ public class Piping : MonoBehaviour
         // Debug.Log(IsConnected(new Vector3Int(1, 1, 0), new Vector3Int(0, -3, 0)));
     }
 
+    void Start() 
+    {
+        CheckBuildingConnectivity();
+    }
+
     public void Update()
     {
         // if (Input.GetMouseButtonDown(0))

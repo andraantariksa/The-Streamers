@@ -14,19 +14,59 @@ public class Building : MonoBehaviour
 
     public bool isConnected = false;
 
+    public bool isWaterHot = false;
+
+    public float minChangingDuration;
+    public float maxChangingDuration;
+    float changeTimer = 0.0f;
+
     void Update()
     {
-        if (isConnected)
+        UpdateMood();
+        UpdateWater();
+    }
+
+    void UpdateMood()
+    {
+        if (changeTimer > 0.0f)
         {
-            coldWaterAmount += (5 * Time.deltaTime);
+            changeTimer -= Time.deltaTime;
         }
         else
         {
-            coldWaterAmount -= (2 * Time.deltaTime);
+            isWaterHot = !isWaterHot;
+            changeTimer = Random.Range(minChangingDuration, maxChangingDuration);
         }
-        
+    }
+
+    void UpdateWater()
+    {
+        if (isConnected)
+        {   
+            if (isWaterHot)
+            {
+                hotWaterAmount += (5 * Time.deltaTime);
+            }
+            else
+            {
+                coldWaterAmount += (5 * Time.deltaTime);    
+            }
+        }
+        else
+        {
+            if (isWaterHot)
+            {
+                hotWaterAmount -= (2 * Time.deltaTime);
+            }
+            else
+            {
+                coldWaterAmount -= (2 * Time.deltaTime);    
+            }
+        }
+        hotWaterAmount = Mathf.Clamp(hotWaterAmount, 0, hotWaterCapacity);
         coldWaterAmount = Mathf.Clamp(coldWaterAmount, 0, coldWaterCapacity);
 
+        Debug.Log(hotWaterAmount);
         Debug.Log(coldWaterAmount);
     }
 }
