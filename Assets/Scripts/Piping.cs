@@ -10,6 +10,9 @@ public class Piping : MonoBehaviour
     // Path is bidirectional, check both key and value
     public HashSet<KeyValuePair<Vector3Int, Vector3Int>> path = new HashSet<KeyValuePair<Vector3Int, Vector3Int>>();
 
+    public Building[] buildingList;
+    public Vector3Int pdamCoordinate;
+
     public void DeletePathRouteFrom(Vector3Int from)
     {
         // Optimize?
@@ -98,15 +101,35 @@ public class Piping : MonoBehaviour
 
     public void OnPipeChange()
     {
-        //Debug.Log(IsConnected(new Vector3Int(2, 0, 0), new Vector3Int(2, 2, 0)));
+        CheckBuildingConnectivity();
+        // print(path);
+        // foreach (var item in path)
+        // {
+        //     Debug.Log(item.Key);
+        // }
+        // Debug.Log(IsConnected(new Vector3Int(1, 1, 0), new Vector3Int(0, -3, 0)));
+    }
+
+    void Start() 
+    {
+        CheckBuildingConnectivity();
     }
 
     public void Update()
     {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //    //Debug.Log(GetComponent<Tilemap>().WorldToCell(worldPosition));
-        //}
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //    Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //    Debug.Log(GetComponent<Tilemap>().WorldToCell(worldPosition));
+        // }
+    }
+
+    void CheckBuildingConnectivity()
+    {
+        foreach (Building building in buildingList)
+        {
+            building.isConnected = IsConnected(pdamCoordinate, building.gridCoordinate);
+            Debug.Log(building.isConnected);
+        }
     }
 }

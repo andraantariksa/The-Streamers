@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PipeL : MonoBehaviour
+public class PipeStraight : MonoBehaviour
 {
     Piping piping;
     Tilemap tilemap;
@@ -12,6 +12,8 @@ public class PipeL : MonoBehaviour
     Sprite[] sprites;
     [SerializeField]
     byte state = 0;
+
+    public bool isInteractable = false;
 
     void Start()
     {
@@ -34,24 +36,12 @@ public class PipeL : MonoBehaviour
         {
             case 0:
                 tilePos.y += 1;
-                tilePos2.x += 1;
-                piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos));
-                piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos2));
-                break;
-            case 1:
-                tilePos.y -= 1;
-                tilePos2.x += 1;
-                piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos));
-                piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos2));
-                break;
-            case 2:
-                tilePos.y -= 1;
-                tilePos2.x -= 1;
+                tilePos2.y -= 1;
                 piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos));
                 piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos2));
                 break;
             default:
-                tilePos.y += 1;
+                tilePos.x += 1;
                 tilePos2.x -= 1;
                 piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos));
                 piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos2));
