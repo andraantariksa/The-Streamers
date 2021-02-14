@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 6029570025704779445}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -102,9 +102,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b6942cdff76282146afb8b9168c5adf4, type: 3}
   state: 0
   isHot: 0
-  materialHotWater: {fileID: 2100000, guid: 5d99fb3073d7a1a469ef4680dacd4aa7, type: 2}
-  materialRegularWater: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  materialHotWater: {fileID: 0}
   isInteractable: 0
+  hotWaterDirs: []
 --- !u!60 &4467899393368023975
 PolygonCollider2D:
   m_ObjectHideFlags: 0
