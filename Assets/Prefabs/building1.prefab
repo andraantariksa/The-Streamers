@@ -169,15 +169,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15710620867a05945b71691e34972f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hotWaterAmount: 0
-  coldWaterAmount: 0
-  hotWaterCapacity: 0
-  coldWaterCapacity: 0
+  hotWaterAmount: 50
+  coldWaterAmount: 50
+  moodAmount: 100
+  hotWaterCapacity: 100
+  coldWaterCapacity: 100
+  moodCapacity: 100
   gridCoordinate: {x: 0, y: 0, z: 0}
   isConnected: 0
   isUsedWaterHot: 0
-  minChangingDuration: 0
-  maxChangingDuration: 0
+  minChangingDuration: 3
+  maxChangingDuration: 10
   hotSlider: {fileID: 7280070099029229800}
   coldSlider: {fileID: 879020619088535935}
   moodSlider: {fileID: 3189294027058941734}

@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -780,12 +780,12 @@ PrefabInstance:
     - target: {fileID: 264193722565197253, guid: d2775c99a62d8534d905f2d363b20445,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 264193722565197253, guid: d2775c99a62d8534d905f2d363b20445,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1982373478449054129, guid: d2775c99a62d8534d905f2d363b20445,
         type: 3}
@@ -795,12 +795,12 @@ PrefabInstance:
     - target: {fileID: 2336397080293597889, guid: d2775c99a62d8534d905f2d363b20445,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2336397080293597889, guid: d2775c99a62d8534d905f2d363b20445,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3426751422263988993, guid: d2775c99a62d8534d905f2d363b20445,
         type: 3}
@@ -915,12 +915,12 @@ PrefabInstance:
     - target: {fileID: 5006549051397583101, guid: d2775c99a62d8534d905f2d363b20445,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5006549051397583101, guid: d2775c99a62d8534d905f2d363b20445,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7925273690747071447, guid: d2775c99a62d8534d905f2d363b20445,
         type: 3}
@@ -2083,7 +2083,7 @@ PrefabInstance:
     - target: {fileID: 5306095892505151611, guid: dbefea30ca0dead48891b6f2fafe369b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5699830068253256199, guid: dbefea30ca0dead48891b6f2fafe369b,
         type: 3}
