@@ -19,6 +19,8 @@ public class PipeStraight : MonoBehaviour, IPipe
     Material materialRegularWater;
     public bool isInteractable = false;
     Color colorRegularWater;
+    [SerializeField]
+    List<Vector3Int> hotWaterDirs;
 
     void Start()
     {
@@ -94,5 +96,10 @@ public class PipeStraight : MonoBehaviour, IPipe
             sr.color = colorRegularWater;
             // sr.material = materialRegularWater;
         }
+    }
+
+    public List<Vector3Int> GetHotWaterDir()
+    {
+        return hotWaterDirs;
     }
 }

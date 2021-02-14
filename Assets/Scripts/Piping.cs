@@ -7,7 +7,7 @@ using System;
 // Piping class
 public class Piping : MonoBehaviour
 {
-    public HashSet<KeyValuePair<Vector3Int, Vector3Int>> oneWayPath = new HashSet<KeyValuePair<Vector3Int, Vector3Int>>();
+    public HashSet<KeyValuePair<Vector3Int, Vector3Int>> allowedPath = new HashSet<KeyValuePair<Vector3Int, Vector3Int>>();
     // Path is bidirectional, check both key and value
     public HashSet<KeyValuePair<Vector3Int, Vector3Int>> path = new HashSet<KeyValuePair<Vector3Int, Vector3Int>>();
     public Dictionary<Vector3Int, IPipe> tiles = new Dictionary<Vector3Int, IPipe>();
@@ -54,11 +54,28 @@ public class Piping : MonoBehaviour
 
     public bool IsPathExistsWithRestriction(Vector3Int from, Vector3Int to)
     {
-        foreach (var pair in oneWayPath)
+        bool thereIsRestriction = false;
+        foreach (var pair in allowedPath)
         {
-            if (
-                (pair.Key == from && pair.Value == to) ||
-                (pair.Key == to && pair.Value == from))
+            if (pair.Key == from)
+            {
+                thereIsRestriction = true;
+                break;
+            }
+        }
+
+        if (thereIsRestriction)
+        {
+            bool allowed = false;
+            foreach (var pair in allowedPath)
+            {
+                if (pair.Key == from && pair.Value == to)
+                {
+                    allowed = true;
+                    break;
+                }
+            }
+            if (!allowed)
             {
                 return false;
             }
@@ -160,7 +177,9 @@ public class Piping : MonoBehaviour
         //     Debug.Log(item.Key);
         // }
         // Debug.Log(IsConnected(new Vector3Int(1, 1, 0), new Vector3Int(0, -3, 0)));
-        SampleHotPipeTransformer();
+
+        ClearHotPipe();
+        SetupHotPipeTransformer();
     }
 
     void PopulateTiles()
@@ -181,24 +200,23 @@ public class Piping : MonoBehaviour
 
         CheckBuildingConnectivity();
 
-        SampleHotPipeTransformer();
+        ClearHotPipe();
+        SetupHotPipeTransformer();
     }
 
-    void SampleHotPipeTransformer()
+    void SetupHotPipeTransformer()
     {
-        // Restrict flow air panas dari a ke b
-        // Hati-hati dengan urutannya!
-        var a = new Vector3Int();
-        a.x = pdamCoordinate.x - 2;
-        a.y = pdamCoordinate.y - 1;
-        a.z = pdamCoordinate.z;
-
-        var b = new Vector3Int();
-        b.x = pdamCoordinate.x - 3;
-        b.y = pdamCoordinate.y - 1;
-        b.z = pdamCoordinate.z;
-
-        TransfromWaterToHotWater(a, b);
+        foreach (var pipe in tiles)
+        {
+            var hotWaterDirs = pipe.Value.GetHotWaterDir();
+            if (hotWaterDirs != null)
+            {
+                foreach (var dir in hotWaterDirs)
+                {
+                    TransfromRegularWaterToHotWater(pipe.Key, pipe.Key + dir);
+                }
+            }
+        }
     }
 
     public void ClearHotPipe()
@@ -209,17 +227,15 @@ public class Piping : MonoBehaviour
         }
     }
 
-    public void TransfromWaterToHotWater(Vector3Int from, Vector3Int to)
+    public void TransfromRegularWaterToHotWater(Vector3Int from, Vector3Int to)
     {
-        ClearHotPipe();
-
-        oneWayPath.Add(new KeyValuePair<Vector3Int, Vector3Int>(from, to));
+        allowedPath.Add(new KeyValuePair<Vector3Int, Vector3Int>(from, to));
 
         Fill((pipe) => {
             pipe.SetHotWaterPipe(true);
 
             return pipe;
-        }, to);
+        }, from); // Pipa si pemanas juga isinya air
     }
 
     public void Update()

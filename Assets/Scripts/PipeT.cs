@@ -18,6 +18,8 @@ public class PipeT : MonoBehaviour, IPipe
     Material materialHotWater;
     Material materialRegularWater;
     Color colorRegularWater;
+    [SerializeField]
+    List<Vector3Int> hotWaterDirs;
 
     void Start()
     {
@@ -114,5 +116,10 @@ public class PipeT : MonoBehaviour, IPipe
             sr.color = colorRegularWater;
             // sr.material = materialRegularWater;
         }
+    }
+
+    public List<Vector3Int> GetHotWaterDir()
+    {
+        return hotWaterDirs;
     }
 }

@@ -20,6 +20,8 @@ public class PipeL : MonoBehaviour, IPipe
 
     public bool isInteractable = false;
     Color colorRegularWater;
+    [SerializeField]
+    List<Vector3Int> hotWaterDirs;
 
     void Start()
     {
@@ -111,5 +113,10 @@ public class PipeL : MonoBehaviour, IPipe
             sr.color = colorRegularWater;
             // sr.material = materialRegularWater;
         }
+    }
+
+    public List<Vector3Int> GetHotWaterDir()
+    {
+        return hotWaterDirs;
     }
 }

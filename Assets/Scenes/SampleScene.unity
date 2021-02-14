@@ -1059,6 +1059,21 @@ PrefabInstance:
       propertyPath: state
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7849976906322791258, guid: 35dbb9d5cf314e14fa60ffb17c284458,
+        type: 3}
+      propertyPath: hotWaterDirs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7849976906322791258, guid: 35dbb9d5cf314e14fa60ffb17c284458,
+        type: 3}
+      propertyPath: hotWaterDirs.Array.data[0].x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7849976906322791258, guid: 35dbb9d5cf314e14fa60ffb17c284458,
+        type: 3}
+      propertyPath: hotWaterDirs.Array.data[1].x
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35dbb9d5cf314e14fa60ffb17c284458, type: 3}
 --- !u!114 &1099841186 stripped
