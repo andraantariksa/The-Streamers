@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PipeT : MonoBehaviour
+public class PipeT : MonoBehaviour, IPipe
 {
     Piping piping;
     Tilemap tilemap;
@@ -12,6 +12,11 @@ public class PipeT : MonoBehaviour
     Sprite[] sprites;
     [SerializeField]
     byte state = 0;
+    [SerializeField]
+    bool isHot = false;
+    [SerializeField]
+    Material materialHotWater;
+    Material materialRegularWater;
 
     void Start()
     {
@@ -20,6 +25,13 @@ public class PipeT : MonoBehaviour
         piping = GetComponentInParent<Piping>();
 
         SetupPathingAndSprite();
+        materialRegularWater = sr.material;
+        ChangeMaterialHotWaterPipe();
+    }
+
+    public Vector3 worldPos()
+    {
+        return GetComponent<Transform>().position;
     }
 
     void SetupPathingAndSprite()
@@ -80,5 +92,23 @@ public class PipeT : MonoBehaviour
     void ChangeState()
     {
         state = (byte)((state + 1) % sprites.Length);
+    }
+
+    public void SetHotWaterPipe(bool isHot)
+    {
+        this.isHot = isHot;
+        ChangeMaterialHotWaterPipe();
+    }
+
+    public void ChangeMaterialHotWaterPipe()
+    {
+        if (isHot)
+        {
+            sr.material = materialHotWater;
+        }
+        else
+        {
+            sr.material = materialRegularWater;
+        }
     }
 }

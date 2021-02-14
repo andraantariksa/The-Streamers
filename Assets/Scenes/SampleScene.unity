@@ -459,6 +459,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 295602058}
     m_Modifications:
+    - target: {fileID: 2590858173015100038, guid: 9bec6f79787850f49bb302b619a4145e,
+        type: 3}
+      propertyPath: isHot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590858173015100038, guid: 9bec6f79787850f49bb302b619a4145e,
+        type: 3}
+      propertyPath: materialHotWater
+      value: 
+      objectReference: {fileID: 2100000, guid: 5d99fb3073d7a1a469ef4680dacd4aa7, type: 2}
+    - target: {fileID: 2590858173015100038, guid: 9bec6f79787850f49bb302b619a4145e,
+        type: 3}
+      propertyPath: materialRegularWater
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 6029570025704779445, guid: 9bec6f79787850f49bb302b619a4145e,
         type: 3}
       propertyPath: m_Name
