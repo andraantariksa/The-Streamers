@@ -278,8 +278,8 @@ public class Piping : MonoBehaviour
     {
         foreach (Building building in buildingList)
         {
-            // building.isConnected = IsConnected(pdamCoordinate, building.gridCoordinate);
-            // Debug.Log(building.isConnected);
+            building.isConnected = IsConnected(pdamCoordinate, building.gridCoordinate);
+            Debug.Log(building.isConnected);
         }
     }
 }

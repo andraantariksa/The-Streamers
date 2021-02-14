@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PipeStraight : MonoBehaviour, IPipe
+public class PipeCross : MonoBehaviour, IPipe
 {
     Piping piping;
     Tilemap tilemap;
@@ -11,13 +11,10 @@ public class PipeStraight : MonoBehaviour, IPipe
     [SerializeField]
     Sprite[] sprites;
     [SerializeField]
-    byte state = 0;
-    [SerializeField]
-    public bool isHot = false;
+    bool isHot = false;
     [SerializeField]
     Material materialHotWater;
     Material materialRegularWater;
-    public bool isInteractable = false;
     Color colorRegularWater;
     [SerializeField]
     List<Vector3Int> hotWaterDirs;
@@ -45,41 +42,46 @@ public class PipeStraight : MonoBehaviour, IPipe
 
         var tilePos = tilemap.WorldToCell(transform.position);
         var tilePos2 = tilemap.WorldToCell(transform.position);
+        var tilePos3 = tilemap.WorldToCell(transform.position);
+        var tilePos4 = tilemap.WorldToCell(transform.position);
 
         piping.DeletePathRouteFrom(currentPos);
-        switch (state)
-        {
-            case 0:
-                tilePos.y += 1;
-                tilePos2.y -= 1;
-                piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos));
-                piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos2));
-                break;
-            default:
-                tilePos.x += 1;
-                tilePos2.x -= 1;
-                piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos));
-                piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos2));
-                break;
-        }
-        sr.sprite = sprites[state];
+
+        tilePos.y += 1;
+        tilePos2.x += 1;
+        tilePos3.y -= 1;
+        tilePos4.x -= 1;
+        piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos));
+        piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos2));
+        piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos3));
+        piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos4));
+
+        // switch (state)
+        // {
+        //     case 0:
+        //         tilePos.y += 1;
+        //         tilePos2.x += 1;
+        //         tilePos3.y -= 1;
+        //         piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos));
+        //         piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos2));
+        //         piping.path.Add(new KeyValuePair<Vector3Int, Vector3Int>(currentPos, tilePos3));
+        //         break;
+        // }
+        // sr.sprite = sprites[state];
     }
 
-    void OnMouseDown()
-    {
-        if (isInteractable)
-        {
-            ChangeState();
-            SetupPathingAndSprite();
+    // void OnMouseDown()
+    // {
+    //     ChangeState();
+    //     SetupPathingAndSprite();
 
-            piping.OnPipeChange();
-        }
-    }
+    //     piping.OnPipeChange();
+    // }
 
-    void ChangeState()
-    {
-        state = (byte)((state + 1) % sprites.Length);
-    }
+    // void ChangeState()
+    // {
+    //     state = (byte)((state + 1) % sprites.Length);
+    // }
 
     public void SetHotWaterPipe(bool isHot)
     {
