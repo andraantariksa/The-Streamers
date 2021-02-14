@@ -435,6 +435,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PipeStraight
       objectReference: {fileID: 0}
+    - target: {fileID: 7849976906322791258, guid: 35dbb9d5cf314e14fa60ffb17c284458,
+        type: 3}
+      propertyPath: isInteractable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35dbb9d5cf314e14fa60ffb17c284458, type: 3}
 --- !u!1001 &291115916
@@ -1463,6 +1468,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35dbb9d5cf314e14fa60ffb17c284458, type: 3}
+--- !u!114 &1610929135 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3891910323197318148, guid: d2775c99a62d8534d905f2d363b20445,
+    type: 3}
+  m_PrefabInstance: {fileID: 896888356}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15710620867a05945b71691e34972f46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1652834441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1621,8 +1638,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7849976906322791258, guid: 35dbb9d5cf314e14fa60ffb17c284458,
         type: 3}
+      propertyPath: isHot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7849976906322791258, guid: 35dbb9d5cf314e14fa60ffb17c284458,
+        type: 3}
       propertyPath: hotWaterDirs.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7849976906322791258, guid: 35dbb9d5cf314e14fa60ffb17c284458,
+        type: 3}
+      propertyPath: hotWaterDirs.Array.data[0].x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7849976906322791258, guid: 35dbb9d5cf314e14fa60ffb17c284458,
         type: 3}
@@ -3362,5 +3389,15 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5699830069566176981, guid: dbefea30ca0dead48891b6f2fafe369b,
+        type: 3}
+      propertyPath: buildingList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5699830069566176981, guid: dbefea30ca0dead48891b6f2fafe369b,
+        type: 3}
+      propertyPath: buildingList.Array.data[0]
+      value: 
+      objectReference: {fileID: 1610929135}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbefea30ca0dead48891b6f2fafe369b, type: 3}
