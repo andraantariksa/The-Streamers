@@ -2,11 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+class Timer
+{
+    public float TimeLeft;
+    public bool Running;
+
+    public Timer(float timeLeft, bool running)
+    {
+        TimeLeft = timeLeft;
+        Running = running;
+    }
+
+    public void TimerUpdate(float dt)
+    {
+        if (Running)
+        {
+            if (TimeLeft > 0.0f)
+            {
+                TimeLeft -= dt;
+            }
+            else
+            {
+                TimeLeft = 0;
+                Running = false;
+            }
+        }
+    }
+}
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
     GameObject thingsAboveGroundObj;
     List<Building> buildings = new List<Building>();
+    // Timer timer = new Timer();
 
     void Start()
     {
@@ -15,8 +44,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+        // timer.TimerUpdate(Time.deltaTime);
     }
+
+
 
     void PopulateBuildings()
     {
