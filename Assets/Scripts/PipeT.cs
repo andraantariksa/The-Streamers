@@ -13,6 +13,8 @@ public class PipeT : MonoBehaviour, IPipe
     Sprite[] sprites;
     public Sprite[] normalSprites;
     public Sprite[] hotSprites;
+
+
     [SerializeField]
     byte state = 0;
     [SerializeField]
@@ -111,7 +113,7 @@ public class PipeT : MonoBehaviour, IPipe
         this.isHot = isHot;
         ChangeMaterialHotWaterPipe();
     }
-    
+
     //Buat ngurus sprite
     public void ChangeMaterialHotWaterPipe()
     {
