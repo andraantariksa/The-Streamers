@@ -101,6 +101,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d0cd385ef012c0444af1be0cf642ca55, type: 3}
   - {fileID: 21300000, guid: b6942cdff76282146afb8b9168c5adf4, type: 3}
   state: 0
+  isHot: 0
+  materialHotWater: {fileID: 2100000, guid: 5d99fb3073d7a1a469ef4680dacd4aa7, type: 2}
+  materialRegularWater: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  isInteractable: 0
 --- !u!60 &4467899393368023975
 PolygonCollider2D:
   m_ObjectHideFlags: 0

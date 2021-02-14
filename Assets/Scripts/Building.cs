@@ -66,7 +66,7 @@ public class Building : MonoBehaviour
         hotWaterAmount = Mathf.Clamp(hotWaterAmount, 0, hotWaterCapacity);
         coldWaterAmount = Mathf.Clamp(coldWaterAmount, 0, coldWaterCapacity);
 
-        Debug.Log(hotWaterAmount);
-        Debug.Log(coldWaterAmount);
+        // Debug.Log(hotWaterAmount);
+        // Debug.Log(coldWaterAmount);
     }
 }

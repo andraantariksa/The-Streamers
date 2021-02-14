@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class MainMenuUI : MonoBehaviour
 {
-    
+    public void OnClickPlay()
+    {
+        Debug.Log("Hello");
+    }
 }

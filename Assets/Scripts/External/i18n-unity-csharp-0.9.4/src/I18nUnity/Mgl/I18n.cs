@@ -11,13 +11,22 @@ namespace Mgl
 
         private static readonly I18n instance = new I18n();
 
-        private static string[] locales = new string[] { "en-US", "fr-FR", "es-ES" };
+        private static string[] locales = new string[] { "en-US", "id-ID" };
 
         private static string _currentLocale = "en-US";
 
         private static string _localePath = "Locales/";
 
         private static bool _isLoggingMissing = true;
+
+        public static I18n Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
+
 
         static I18n()
         {
@@ -26,14 +35,6 @@ namespace Mgl
 
         protected I18n()
         {
-        }
-
-        public static I18n Instance
-        {
-            get
-            {
-                return instance;
-            }
         }
 
         static void InitConfig()
