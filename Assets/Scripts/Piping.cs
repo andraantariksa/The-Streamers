@@ -36,7 +36,23 @@ public class Piping : MonoBehaviour
         return neighbors;
     }
 
-    public bool IsPathExists(Vector3Int from, Vector3Int to)
+    public HashSet<Vector3Int> GetNeighborsWithRestriction(Vector3Int node)
+    {
+        var neighbors = new HashSet<Vector3Int>();
+        foreach (var dest in path)
+        {
+            if (dest.Key == node)
+            {
+                if (IsPathExistsWithRestriction(dest.Key, dest.Value))
+                {
+                    neighbors.Add(dest.Value);
+                }
+            }
+        }
+        return neighbors;
+    }
+
+    public bool IsPathExistsWithRestriction(Vector3Int from, Vector3Int to)
     {
         foreach (var pair in oneWayPath)
         {
@@ -48,6 +64,29 @@ public class Piping : MonoBehaviour
             }
         }
 
+        byte res = 0;
+        foreach (var pair in path)
+        {
+            if (
+                (pair.Key == from && pair.Value == to) ||
+                (pair.Key == to && pair.Value == from))
+            {
+                if (res == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    res++;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public bool IsPathExists(Vector3Int from, Vector3Int to)
+    {
         byte res = 0;
         foreach (var pair in path)
         {
@@ -121,6 +160,7 @@ public class Piping : MonoBehaviour
         //     Debug.Log(item.Key);
         // }
         // Debug.Log(IsConnected(new Vector3Int(1, 1, 0), new Vector3Int(0, -3, 0)));
+        SampleHotPipeTransformer();
     }
 
     void PopulateTiles()
@@ -141,11 +181,45 @@ public class Piping : MonoBehaviour
 
         CheckBuildingConnectivity();
 
+        SampleHotPipeTransformer();
+    }
+
+    void SampleHotPipeTransformer()
+    {
+        // Restrict flow air panas dari a ke b
+        // Hati-hati dengan urutannya!
+        var a = new Vector3Int();
+        a.x = pdamCoordinate.x - 2;
+        a.y = pdamCoordinate.y - 1;
+        a.z = pdamCoordinate.z;
+
+        var b = new Vector3Int();
+        b.x = pdamCoordinate.x - 3;
+        b.y = pdamCoordinate.y - 1;
+        b.z = pdamCoordinate.z;
+
+        TransfromWaterToHotWater(a, b);
+    }
+
+    public void ClearHotPipe()
+    {
+        foreach (var tile in tiles)
+        {
+            tile.Value.SetHotWaterPipe(false);
+        }
+    }
+
+    public void TransfromWaterToHotWater(Vector3Int from, Vector3Int to)
+    {
+        ClearHotPipe();
+
+        oneWayPath.Add(new KeyValuePair<Vector3Int, Vector3Int>(from, to));
+
         Fill((pipe) => {
             pipe.SetHotWaterPipe(true);
 
             return pipe;
-        }, pdamCoordinate);
+        }, to);
     }
 
     public void Update()
@@ -169,7 +243,7 @@ public class Piping : MonoBehaviour
         while (queue.Count > 0)
         {
             var currentPos = queue.Dequeue();
-            var neighbors = GetNeighbors(currentPos);
+            var neighbors = GetNeighborsWithRestriction(currentPos);
             foreach (Vector3Int neighbor in neighbors)
             {
                 if (!exploredNodes.Contains(neighbor))

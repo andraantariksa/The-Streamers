@@ -18,6 +18,7 @@ public class PipeStraight : MonoBehaviour, IPipe
     Material materialHotWater;
     Material materialRegularWater;
     public bool isInteractable = false;
+    Color colorRegularWater;
 
     void Start()
     {
@@ -27,6 +28,7 @@ public class PipeStraight : MonoBehaviour, IPipe
 
         SetupPathingAndSprite();
         materialRegularWater = sr.material;
+        colorRegularWater = sr.color;
         ChangeMaterialHotWaterPipe();
     }
 
@@ -84,11 +86,13 @@ public class PipeStraight : MonoBehaviour, IPipe
     {
         if (isHot)
         {
-            sr.material = materialHotWater;
+            sr.color = Color.red;
+            // sr.material = materialHotWater;
         }
         else
         {
-            sr.material = materialRegularWater;
+            sr.color = colorRegularWater;
+            // sr.material = materialRegularWater;
         }
     }
 }
