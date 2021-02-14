@@ -11,6 +11,8 @@ public class PipeL : MonoBehaviour, IPipe
     Sprite[] sprites;
     public Sprite[] normalSprites;
     public Sprite[] hotSprites;
+    public Sprite[] rotatingSprites;
+
     [SerializeField]
     byte state = 0;
     [SerializeField]
@@ -29,7 +31,11 @@ public class PipeL : MonoBehaviour, IPipe
         sr = GetComponent<SpriteRenderer>();
         tilemap = GetComponentInParent<Tilemap>();
         piping = GetComponentInParent<Piping>();
-
+        
+        if (isInteractable)
+        {
+            sprites = rotatingSprites;
+        }
         SetupPathingAndSprite();
         materialRegularWater = sr.material;
         colorRegularWater = sr.color;

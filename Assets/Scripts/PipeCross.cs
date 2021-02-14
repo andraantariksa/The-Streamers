@@ -10,6 +10,8 @@ public class PipeCross : MonoBehaviour, IPipe
     SpriteRenderer sr;
     [SerializeField]
     Sprite[] sprites;
+    public Sprite[] rotatingSprites;
+
     [SerializeField]
     bool isHot = false;
     [SerializeField]
@@ -18,13 +20,18 @@ public class PipeCross : MonoBehaviour, IPipe
     Color colorRegularWater;
     [SerializeField]
     List<Vector3Int> hotWaterDirs;
-
+    
+    public bool isInteractable = false;
+    
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         tilemap = GetComponentInParent<Tilemap>();
         piping = GetComponentInParent<Piping>();
-
+        if (isInteractable)
+        {
+            sprites = rotatingSprites;
+        }
         SetupPathingAndSprite();
         materialRegularWater = sr.material;
         colorRegularWater = sr.color;

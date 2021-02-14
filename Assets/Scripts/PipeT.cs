@@ -13,7 +13,7 @@ public class PipeT : MonoBehaviour, IPipe
     Sprite[] sprites;
     public Sprite[] normalSprites;
     public Sprite[] hotSprites;
-
+    Sprite[] rotatingSprites;
 
     [SerializeField]
     byte state = 0;
@@ -33,6 +33,11 @@ public class PipeT : MonoBehaviour, IPipe
         sr = GetComponent<SpriteRenderer>();
         tilemap = GetComponentInParent<Tilemap>();
         piping = GetComponentInParent<Piping>();
+
+        if (isInteractable)
+        {
+            sprites = rotatingSprites;
+        }
 
         SetupPathingAndSprite();
         materialRegularWater = sr.material;

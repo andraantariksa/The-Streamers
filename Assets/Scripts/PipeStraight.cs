@@ -12,6 +12,8 @@ public class PipeStraight : MonoBehaviour, IPipe
     public Sprite[] normalSprites;
     public Sprite[] hotSprites;
     public Sprite[] heaterSprites;
+    public Sprite[] rotatingSprites;
+
     [SerializeField]
     byte state = 0;
     [SerializeField]
@@ -38,7 +40,10 @@ public class PipeStraight : MonoBehaviour, IPipe
         {
             sprites = normalSprites;
         }
-
+        if (isInteractable)
+        {
+            sprites = rotatingSprites;
+        }
         SetupPathingAndSprite();
         materialRegularWater = sr.material;
         colorRegularWater = sr.color;
