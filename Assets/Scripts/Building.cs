@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class Building : MonoBehaviour
 {
@@ -20,10 +20,24 @@ public class Building : MonoBehaviour
     public float maxChangingDuration;
     float changeTimer = 0.0f;
 
+    public Slider hotSlider;
+    public Slider coldSlider;
+    public Slider moodSlider;
+    public Image tempIndicator;
+    public Sprite coldIndicator;
+    public Sprite hotIndicator;
+
+    void Start() 
+    {
+        changeTimer = Random.Range(minChangingDuration, maxChangingDuration);
+        UpdateIndicator();
+    }
+
     void Update()
     {
         UpdateMood();
         UpdateWater();
+        UpdateSlider();
     }
 
     void UpdateMood()
@@ -36,6 +50,7 @@ public class Building : MonoBehaviour
         {
             isWaterHot = !isWaterHot;
             changeTimer = Random.Range(minChangingDuration, maxChangingDuration);
+            UpdateIndicator();
         }
     }
 
@@ -68,5 +83,23 @@ public class Building : MonoBehaviour
 
         // Debug.Log(hotWaterAmount);
         // Debug.Log(coldWaterAmount);
+    }
+
+    void UpdateSlider()
+    {
+        hotSlider.value = (hotWaterAmount / hotWaterCapacity);
+        coldSlider.value = (coldWaterAmount / coldWaterCapacity);
+    }
+
+    void UpdateIndicator()
+    {
+        if (isWaterHot)
+        {
+            tempIndicator.sprite = hotIndicator;
+        }
+        else
+        {
+            tempIndicator.sprite = coldIndicator;
+        }
     }
 }
