@@ -22,6 +22,11 @@ public class LanguageSelectorUI : MonoBehaviour
         canvas.enabled = !isHidden;
     }
 
+    public void StartSelectLanguage()
+    {
+        SetCanvasHidden(false);
+    }
+
     public void EndSelectLanguage()
     {
         SetCanvasHidden(true);

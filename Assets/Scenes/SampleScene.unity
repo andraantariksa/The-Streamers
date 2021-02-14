@@ -462,7 +462,7 @@ PrefabInstance:
     - target: {fileID: 2590858173015100038, guid: 9bec6f79787850f49bb302b619a4145e,
         type: 3}
       propertyPath: isHot
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2590858173015100038, guid: 9bec6f79787850f49bb302b619a4145e,
         type: 3}
@@ -1059,6 +1059,21 @@ PrefabInstance:
       propertyPath: state
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7849976906322791258, guid: 35dbb9d5cf314e14fa60ffb17c284458,
+        type: 3}
+      propertyPath: hotWaterDirs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7849976906322791258, guid: 35dbb9d5cf314e14fa60ffb17c284458,
+        type: 3}
+      propertyPath: hotWaterDirs.Array.data[0].x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7849976906322791258, guid: 35dbb9d5cf314e14fa60ffb17c284458,
+        type: 3}
+      propertyPath: hotWaterDirs.Array.data[1].x
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35dbb9d5cf314e14fa60ffb17c284458, type: 3}
 --- !u!114 &1099841186 stripped
@@ -1492,10 +1507,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1336749228}
     m_Modifications:
+    - target: {fileID: 264193722565197253, guid: d2775c99a62d8534d905f2d363b20445,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 264193722565197253, guid: d2775c99a62d8534d905f2d363b20445,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1982373478449054129, guid: d2775c99a62d8534d905f2d363b20445,
         type: 3}
       propertyPath: m_Name
       value: Building1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2336397080293597889, guid: d2775c99a62d8534d905f2d363b20445,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2336397080293597889, guid: d2775c99a62d8534d905f2d363b20445,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3426751422263988993, guid: d2775c99a62d8534d905f2d363b20445,
         type: 3}
@@ -1576,6 +1611,16 @@ PrefabInstance:
         type: 3}
       propertyPath: coldWaterCapacity
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5006549051397583101, guid: d2775c99a62d8534d905f2d363b20445,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5006549051397583101, guid: d2775c99a62d8534d905f2d363b20445,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2775c99a62d8534d905f2d363b20445, type: 3}
@@ -1961,6 +2006,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: rsz_pipa_horizontal_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7849976906322791258, guid: 35dbb9d5cf314e14fa60ffb17c284458,
+        type: 3}
+      propertyPath: isHot
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7849976906322791258, guid: 35dbb9d5cf314e14fa60ffb17c284458,
         type: 3}

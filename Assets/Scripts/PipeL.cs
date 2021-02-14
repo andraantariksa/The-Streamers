@@ -19,6 +19,9 @@ public class PipeL : MonoBehaviour, IPipe
     Material materialRegularWater;
 
     public bool isInteractable = false;
+    Color colorRegularWater;
+    [SerializeField]
+    List<Vector3Int> hotWaterDirs;
 
     void Start()
     {
@@ -28,6 +31,7 @@ public class PipeL : MonoBehaviour, IPipe
 
         SetupPathingAndSprite();
         materialRegularWater = sr.material;
+        colorRegularWater = sr.color;
         ChangeMaterialHotWaterPipe();
     }
 
@@ -101,11 +105,18 @@ public class PipeL : MonoBehaviour, IPipe
     {
         if (isHot)
         {
-            sr.material = materialHotWater;
+            sr.color = Color.red;
+            // sr.material = materialHotWater;
         }
         else
         {
-            sr.material = materialRegularWater;
+            sr.color = colorRegularWater;
+            // sr.material = materialRegularWater;
         }
+    }
+
+    public List<Vector3Int> GetHotWaterDir()
+    {
+        return hotWaterDirs;
     }
 }
