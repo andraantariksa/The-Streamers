@@ -7,8 +7,11 @@ public class Building : MonoBehaviour
 {
     public float hotWaterAmount;
     public float coldWaterAmount;
+    public float moodAmount = 100.0f;
     public float hotWaterCapacity;
     public float coldWaterCapacity;
+    public float moodCapacity = 100.0f;
+
 
     public Vector3Int gridCoordinate;
 
@@ -85,10 +88,18 @@ public class Building : MonoBehaviour
         if (isUsedWaterHot)
         {
             hotWaterAmount -= (2 * Time.deltaTime);
+            if (hotWaterAmount <= 0)
+            {
+                moodAmount -= (5 * Time.deltaTime);
+            }
         }
         else
         {
             coldWaterAmount -= (2 * Time.deltaTime);
+            if (coldWaterAmount <= 0)
+            {
+                moodAmount -= (5 * Time.deltaTime);
+            }
         }
 
         if (isConnected)
@@ -105,6 +116,7 @@ public class Building : MonoBehaviour
 
         hotWaterAmount = Mathf.Clamp(hotWaterAmount, 0, hotWaterCapacity);
         coldWaterAmount = Mathf.Clamp(coldWaterAmount, 0, coldWaterCapacity);
+        moodAmount = Mathf.Clamp(moodAmount, 0, moodCapacity);
 
         // Debug.Log(hotWaterAmount);
         // Debug.Log(coldWaterAmount);
@@ -114,6 +126,7 @@ public class Building : MonoBehaviour
     {
         hotSlider.value = (hotWaterAmount / hotWaterCapacity);
         coldSlider.value = (coldWaterAmount / coldWaterCapacity);
+        moodSlider.value = (moodAmount / moodCapacity);
     }
 
     void UpdateIndicator()

@@ -8,8 +8,13 @@ public class PipeT : MonoBehaviour, IPipe
     Piping piping;
     Tilemap tilemap;
     SpriteRenderer sr;
-    [SerializeField]
+
+    //Buat ngurus sprite
     Sprite[] sprites;
+    public Sprite[] normalSprites;
+    public Sprite[] hotSprites;
+
+
     [SerializeField]
     byte state = 0;
     [SerializeField]
@@ -20,6 +25,8 @@ public class PipeT : MonoBehaviour, IPipe
     Color colorRegularWater;
     [SerializeField]
     List<Vector3Int> hotWaterDirs;
+
+    public bool isInteractable = false;
 
     void Start()
     {
@@ -87,10 +94,13 @@ public class PipeT : MonoBehaviour, IPipe
 
     void OnMouseDown()
     {
-        ChangeState();
-        SetupPathingAndSprite();
+        if (isInteractable)
+        {
+            ChangeState();
+            SetupPathingAndSprite();
 
-        piping.OnPipeChange();
+            piping.OnPipeChange();
+        }
     }
 
     void ChangeState()
@@ -104,18 +114,24 @@ public class PipeT : MonoBehaviour, IPipe
         ChangeMaterialHotWaterPipe();
     }
 
+    //Buat ngurus sprite
     public void ChangeMaterialHotWaterPipe()
     {
-        if (isHot)
+        if (hotWaterDirs.Count == 0)
         {
-            sr.color = Color.red;
-            // sr.material = materialHotWater;
+            if (isHot)
+            {
+                sprites = hotSprites;
+                // sr.material = materialHotWater;
+            }
+            else
+            {
+                sprites = normalSprites;
+                // sr.material = materialRegularWater;
+            }
         }
-        else
-        {
-            sr.color = colorRegularWater;
-            // sr.material = materialRegularWater;
-        }
+        
+        sr.sprite = sprites[state];
     }
 
     public List<Vector3Int> GetHotWaterDir()

@@ -8,8 +8,10 @@ public class PipeStraight : MonoBehaviour, IPipe
     Piping piping;
     Tilemap tilemap;
     SpriteRenderer sr;
-    [SerializeField]
     Sprite[] sprites;
+    public Sprite[] normalSprites;
+    public Sprite[] hotSprites;
+    public Sprite[] heaterSprites;
     [SerializeField]
     byte state = 0;
     [SerializeField]
@@ -28,10 +30,21 @@ public class PipeStraight : MonoBehaviour, IPipe
         tilemap = GetComponentInParent<Tilemap>();
         piping = GetComponentInParent<Piping>();
 
+        if (hotWaterDirs.Count != 0)
+        {
+            sprites = heaterSprites;
+        }
+        else
+        {
+            sprites = normalSprites;
+        }
+
         SetupPathingAndSprite();
         materialRegularWater = sr.material;
         colorRegularWater = sr.color;
         ChangeMaterialHotWaterPipe();
+
+        
     }
 
     public Vector3 worldPos()
@@ -87,18 +100,23 @@ public class PipeStraight : MonoBehaviour, IPipe
         ChangeMaterialHotWaterPipe();
     }
 
-    public void ChangeMaterialHotWaterPipe()
+    public void ChangeMaterialHotWaterPipe() //Ngatur ubah warna
     {
-        if (isHot)
+        if (hotWaterDirs.Count == 0)
         {
-            sr.color = Color.red;
-            // sr.material = materialHotWater;
+            if (isHot)
+            {
+                sprites = hotSprites;
+                // sr.material = materialHotWater;
+            }
+            else
+            {
+                sprites = normalSprites;
+                // sr.material = materialRegularWater;
+            }
         }
-        else
-        {
-            sr.color = colorRegularWater;
-            // sr.material = materialRegularWater;
-        }
+        
+        sr.sprite = sprites[state];
     }
 
     public List<Vector3Int> GetHotWaterDir()
