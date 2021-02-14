@@ -1,34 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LanguageSelectorUI : MonoBehaviour
 {
-    private Canvas canvas;
-    private Mgl.I18n i18n = Mgl.I18n.Instance;
+    Mgl.I18n i18n = Mgl.I18n.Instance;
+    static string[] locales = new string[] { "en-US", "id-ID" };
+    static byte localeIdx = 0;
+    [SerializeField]
+    Sprite[] flags;
 
     void Start()
     {
-        canvas = GetComponent<Canvas>();
+        UpdateButton();
     }
 
-    public void SelectLanguage(string locale)
+    public void UpdateButton()
     {
-        Mgl.I18n.SetLocale(locale);
+        var locale = Mgl.I18n.GetLocale();
+        for (byte i = 0; i < locales.Length; ++i)
+        {
+            if (locale == locales[i])
+            {
+                GetComponent<Image>().sprite = flags[i];
+                return;
+            }
+        }
     }
 
-    void SetCanvasHidden(bool isHidden)
+    public void ToggleLanguage()
     {
-        canvas.enabled = !isHidden;
-    }
-
-    public void StartSelectLanguage()
-    {
-        SetCanvasHidden(false);
-    }
-
-    public void EndSelectLanguage()
-    {
-        SetCanvasHidden(true);
+        localeIdx = (byte)((localeIdx + 1) % locales.Length);
+        Mgl.I18n.SetLocale(locales[localeIdx]);
+        
+        SceneManager.LoadScene("MainMenuScene"); // Reload the scene to reload the language
     }
 }
