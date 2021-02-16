@@ -101,9 +101,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 22af01602582c9f4091db39b1a003c5f, type: 3}
   - {fileID: 21300000, guid: 4e347fdc2c4915f47aa32c590057d92d, type: 3}
   hotSprites:
-  - {fileID: 21300000, guid: 3b03cc0fab14db34d9b9fb60127f06f7, type: 3}
+  - {fileID: 21300000, guid: bf854d4054e46db4ebc74ac5a89d4d27, type: 3}
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 7149468dd6ea32449aaf055d7bbd4082, type: 3}
   - {fileID: 0}
   state: 0
   isHot: 0

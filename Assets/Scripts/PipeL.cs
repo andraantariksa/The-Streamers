@@ -24,12 +24,17 @@ public class PipeL : MonoBehaviour, IPipe
     [SerializeField]
     List<Vector3Int> hotWaterDirs;
 
-    void Start()
+    void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         tilemap = GetComponentInParent<Tilemap>();
         piping = GetComponentInParent<Piping>();
+        sprites = normalSprites;
+    }
 
+    void Start()
+    {
+        
         SetupPathingAndSprite();
         materialRegularWater = sr.material;
         colorRegularWater = sr.color;

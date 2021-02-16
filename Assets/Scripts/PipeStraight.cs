@@ -24,7 +24,7 @@ public class PipeStraight : MonoBehaviour, IPipe
     [SerializeField]
     List<Vector3Int> hotWaterDirs;
 
-    void Start()
+    void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         tilemap = GetComponentInParent<Tilemap>();
@@ -38,7 +38,10 @@ public class PipeStraight : MonoBehaviour, IPipe
         {
             sprites = normalSprites;
         }
+    }
 
+    void Start()
+    {
         SetupPathingAndSprite();
         materialRegularWater = sr.material;
         colorRegularWater = sr.color;
@@ -115,7 +118,7 @@ public class PipeStraight : MonoBehaviour, IPipe
                 // sr.material = materialRegularWater;
             }
         }
-        
+
         sr.sprite = sprites[state];
     }
 

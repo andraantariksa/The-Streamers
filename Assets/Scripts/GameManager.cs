@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 class Timer
 {
@@ -34,6 +36,12 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     GameObject thingsAboveGroundObj;
+    [SerializeField]
+    GameObject upperViewObj;
+    [SerializeField]
+    GameObject textScoreObj;
+    [SerializeField]
+    GameObject textResultScoreObj;
     List<Building> buildings = new List<Building>();
     // Timer timer = new Timer();
 
@@ -45,9 +53,24 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // timer.TimerUpdate(Time.deltaTime);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (upperViewObj.GetComponent<Transform>().transform.position.x < 10.0f)
+            {
+                upperViewObj.GetComponent<Transform>().transform.position = new Vector3(1000.0f, 0.0f, 0.0f);
+            }
+            else
+            {
+                upperViewObj.GetComponent<Transform>().transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+            }
+        }
+        textScoreObj.GetComponent<Text>().text = string.Format("{0:0.0}%", MeanScore());
     }
 
-
+    float MeanScore()
+    {
+        return TotalScore() / (float)buildings.Count;
+    }
 
     void PopulateBuildings()
     {
@@ -70,5 +93,10 @@ public class GameManager : MonoBehaviour
         }
 
         return moodTotal;
+    }
+
+    public void BackToLevelSelector()
+    {
+        SceneManager.LoadScene("LevelSelectorScene", LoadSceneMode.Single);
     }
 }
