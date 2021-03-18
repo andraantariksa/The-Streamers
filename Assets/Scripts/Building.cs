@@ -7,14 +7,17 @@ public class Building : MonoBehaviour
 {
     public float hotWaterAmount;
     public float coldWaterAmount;
+    public float moodAmount = 100.0f;
     public float hotWaterCapacity;
     public float coldWaterCapacity;
+    public float moodCapacity = 100.0f;
+
 
     public Vector3Int gridCoordinate;
 
     public bool isConnected = false;
 
-    public bool isWaterHot = false;
+    public bool isUsedWaterHot = false;
 
     public float minChangingDuration;
     public float maxChangingDuration;
@@ -26,6 +29,8 @@ public class Building : MonoBehaviour
     public Image tempIndicator;
     public Sprite coldIndicator;
     public Sprite hotIndicator;
+
+    public PipeStraight connectedPipe;
 
     void Start() 
     {
@@ -48,7 +53,7 @@ public class Building : MonoBehaviour
         }
         else
         {
-            isWaterHot = !isWaterHot;
+            isUsedWaterHot = !isUsedWaterHot;
             changeTimer = Random.Range(minChangingDuration, maxChangingDuration);
             UpdateIndicator();
         }
@@ -56,30 +61,62 @@ public class Building : MonoBehaviour
 
     void UpdateWater()
     {
+        // if (isConnected)
+        // {   
+        //     if (isUsedWaterHot)
+        //     {
+        //         hotWaterAmount += (5 * Time.deltaTime);
+        //     }
+        //     else
+        //     {
+        //         coldWaterAmount += (5 * Time.deltaTime);    
+        //     }
+        // }
+        // else
+        // {
+        //     if (isUsedWaterHot)
+        //     {
+        //         hotWaterAmount -= (2 * Time.deltaTime);
+        //     }
+        //     else
+        //     {
+        //         coldWaterAmount -= (2 * Time.deltaTime);    
+        //     }
+        // }
+
+
+        if (isUsedWaterHot)
+        {
+            hotWaterAmount -= (2 * Time.deltaTime);
+            if (hotWaterAmount <= 0)
+            {
+                moodAmount -= (5 * Time.deltaTime);
+            }
+        }
+        else
+        {
+            coldWaterAmount -= (2 * Time.deltaTime);
+            if (coldWaterAmount <= 0)
+            {
+                moodAmount -= (5 * Time.deltaTime);
+            }
+        }
+
         if (isConnected)
-        {   
-            if (isWaterHot)
+        {
+            if (connectedPipe.isHot)
             {
                 hotWaterAmount += (5 * Time.deltaTime);
             }
             else
             {
-                coldWaterAmount += (5 * Time.deltaTime);    
+                coldWaterAmount += (5 * Time.deltaTime);
             }
         }
-        else
-        {
-            if (isWaterHot)
-            {
-                hotWaterAmount -= (2 * Time.deltaTime);
-            }
-            else
-            {
-                coldWaterAmount -= (2 * Time.deltaTime);    
-            }
-        }
+
         hotWaterAmount = Mathf.Clamp(hotWaterAmount, 0, hotWaterCapacity);
         coldWaterAmount = Mathf.Clamp(coldWaterAmount, 0, coldWaterCapacity);
+        moodAmount = Mathf.Clamp(moodAmount, 0, moodCapacity);
 
         // Debug.Log(hotWaterAmount);
         // Debug.Log(coldWaterAmount);
@@ -89,11 +126,12 @@ public class Building : MonoBehaviour
     {
         hotSlider.value = (hotWaterAmount / hotWaterCapacity);
         coldSlider.value = (coldWaterAmount / coldWaterCapacity);
+        moodSlider.value = (moodAmount / moodCapacity);
     }
 
     void UpdateIndicator()
     {
-        if (isWaterHot)
+        if (isUsedWaterHot)
         {
             tempIndicator.sprite = hotIndicator;
         }
@@ -102,4 +140,9 @@ public class Building : MonoBehaviour
             tempIndicator.sprite = coldIndicator;
         }
     }
+
+    // void CheckWaterTemp()
+    // {
+    //     isUsedWaterHot = connectedPipe.isHot;
+    // }
 }

@@ -8,8 +8,9 @@ public class PipeL : MonoBehaviour, IPipe
     Piping piping;
     Tilemap tilemap;
     SpriteRenderer sr;
-    [SerializeField]
     Sprite[] sprites;
+    public Sprite[] normalSprites;
+    public Sprite[] hotSprites;
     [SerializeField]
     byte state = 0;
     [SerializeField]
@@ -23,12 +24,17 @@ public class PipeL : MonoBehaviour, IPipe
     [SerializeField]
     List<Vector3Int> hotWaterDirs;
 
-    void Start()
+    void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         tilemap = GetComponentInParent<Tilemap>();
         piping = GetComponentInParent<Piping>();
+        sprites = normalSprites;
+    }
 
+    void Start()
+    {
+        
         SetupPathingAndSprite();
         materialRegularWater = sr.material;
         colorRegularWater = sr.color;
@@ -103,16 +109,21 @@ public class PipeL : MonoBehaviour, IPipe
 
     public void ChangeMaterialHotWaterPipe()
     {
-        if (isHot)
+        if (hotWaterDirs.Count == 0)
         {
-            sr.color = Color.red;
-            // sr.material = materialHotWater;
+            if (isHot)
+            {
+                sprites = hotSprites;
+                // sr.material = materialHotWater;
+            }
+            else
+            {
+                sprites = normalSprites;
+                // sr.material = materialRegularWater;
+            }
         }
-        else
-        {
-            sr.color = colorRegularWater;
-            // sr.material = materialRegularWater;
-        }
+        
+        sr.sprite = sprites[state];
     }
 
     public List<Vector3Int> GetHotWaterDir()

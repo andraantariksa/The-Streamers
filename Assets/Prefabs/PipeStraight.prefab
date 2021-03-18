@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3627310392122921751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -95,13 +95,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16baca2187eed1244ad183a9e6d3d25c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites:
+  sprites: []
+  normalSprites:
   - {fileID: 21300000, guid: d694ee47a0cdcc84da8cef9f614ecd6a, type: 3}
   - {fileID: 21300000, guid: a9ebccbe1fb402e4f85cebd3c264b8d9, type: 3}
+  hotSprites:
+  - {fileID: 21300000, guid: 1effa289c9e153148a62185de17f04dc, type: 3}
+  - {fileID: 21300000, guid: 589432bb1426faa4da56f30783ddc7ed, type: 3}
+  heaterSprites:
+  - {fileID: 21300000, guid: d23c28b23382f564a98d4885caf9a50c, type: 3}
+  - {fileID: 21300000, guid: 6254c60e00b3fa9409a76c362022f221, type: 3}
   state: 0
   isHot: 0
-  materialHotWater: {fileID: 2100000, guid: 5d99fb3073d7a1a469ef4680dacd4aa7, type: 2}
+  materialHotWater: {fileID: 0}
   isInteractable: 0
+  hotWaterDirs: []
 --- !u!60 &1073819942424417056
 PolygonCollider2D:
   m_ObjectHideFlags: 0
